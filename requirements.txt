@@ -1,4 +1,3 @@
 flask
 flask-wtf
 gunicorn
-email_validator
