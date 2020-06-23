@@ -6,20 +6,6 @@ from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, Post
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-posts = [
-    {
-        'author': 'Aditya Aggarwal',
-        'title': 'BlogPost 1',
-        'content': 'Hey There',
-        'date_posted': '14/06/2020'
-    },
-    {
-        'author': 'Aditya ',
-        'title': 'BlogPost 2',
-        'content': 'Hello here',
-        'date_posted': '15/06/2020'
-    }
-]
 
 @app.route("/")
 @app.route("/home")
@@ -127,6 +113,25 @@ def update_post(post_id):
     if post.author != current_user:
         abort(403)
     form = PostForm()
-    post.title = form.title.data
-    post.content = form.content.data
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Post Updated Successfully', 'success')
+        return redirect(url_for('home'))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
     return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
+
+
+@app.route('/post/<int:post_id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Post Deleted', 'danger')
+    return redirect(url_for('home'))
