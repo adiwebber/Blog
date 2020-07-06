@@ -1,4 +1,5 @@
 import os
+from boto.s3.connection import S3Connection
 
 class Config:
     SECRET_KEY = 'a6d4c206873961514ec69759a9b6b4f7'
@@ -6,5 +7,5 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('EMAIL_USER')
-    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+    MAIL_USERNAME = S3Connection(os.environ['EMAIL_USER'])
+    MAIL_PASSWORD = S3Connection(os.environ['EMAIL_PASS'])
