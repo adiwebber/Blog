@@ -7,4 +7,4 @@ flask-bcrypt
 flask-login
 Pillow
 flask-mail
-boto
+psychopg2
