@@ -1,5 +1,4 @@
 import os
-from boto.s3.connection import S3Connection
 
 class Config:
     SECRET_KEY = 'a6d4c206873961514ec69759a9b6b4f7'
