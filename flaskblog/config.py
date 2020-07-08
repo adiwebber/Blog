@@ -1,9 +1,9 @@
 import os
 host = os.environ['HOST']
 password = os.environ['DATABASE_PASS']
-user = fjodxbqagzmizc
+user = "fjodxbqagzmizc"
 port = 5432
-database = dfs23g430okcdn
+database = "dfs23g430okcdn"
 class Config:
     SECRET_KEY = 'a6d4c206873961514ec69759a9b6b4f7'
     #SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
