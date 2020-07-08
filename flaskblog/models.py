@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer 
 from flask import current_app
 from sqlalchemy import *
-from config import host, port, database, user, password
+from flaskblog.config import host, port, database, user, password
 
 conn_str = f"postgresql://{user}:{password}@{host}/{database}"
 engine = create_engine(conn_str)

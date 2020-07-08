@@ -4,7 +4,7 @@ from flaskblog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskblog.users.utils import save_picture, send_reset_email
-from config import host, port, database, user, password
+from flaskblog.config import host, port, database, user, password
 
 users = Blueprint('users', __name__)
 
