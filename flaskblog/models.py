@@ -4,12 +4,6 @@ from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer 
 from flask import current_app
 from sqlalchemy import *
-from flaskblog.config import host, port, database, user, password
-
-conn_str = f"postgresql://{user}:{password}@{host}/{database}"
-engine = create_engine(conn_str)
-connection = engine.connect()
-metadata = MetaData()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,8 +33,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{ self.username }', '{ self.email }', '{ self.image_file }')"
 
-    metadata.create_all(engine)
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -50,5 +42,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{ self.title }', '{ self.date_posted }')"
-
-    metadata.create_all(engine)
